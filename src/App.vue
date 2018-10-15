@@ -1,13 +1,27 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <el-container>
+      <el-container>
+        <el-header>
+          <!-- 导航栏 -->
+          <navbar></navbar>
+        </el-header>
+        <!-- 主体页面 -->
+        <el-main>
+          <router-view/>
+        </el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
 <script>
+import navbar from './components/navbar'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    navbar
+  }
 }
 </script>
 
