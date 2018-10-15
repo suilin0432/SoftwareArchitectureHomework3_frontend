@@ -21,7 +21,8 @@
 </template>
 
 <script>
-import {request_logout} from '../httpRequests/api'
+import {request_logout, request_get_info} from '../httpRequests/api'
+import {setCookie, getCookie, deleteCookie} from '../cookieOperation'
 export default {
   name: 'navbar',
   data () {
@@ -34,6 +35,8 @@ export default {
       console.log('logout')
       request_logout()
         .then(res => {
+          deleteCookie('username')
+          deleteCookie('userId')
           this.$message({
             message: '注销成功',
             type: 'success',
@@ -41,7 +44,6 @@ export default {
           })
           this.$store.state.isLogged = false
           this.$router.push('/')
-
         }).catch(e => {
           console.log('error! login.vue', e.response.data)
         })
@@ -53,7 +55,17 @@ export default {
     }
   },
   created () {
-    console.log(this.$store.state.userInfo)
+  },
+  mounted () {
+    request_get_info()
+      .then(
+        res => {
+          this.$store.state.isLogged = true
+          this.$store.state.userInfo.username = res.data.username
+          this.$store.state.userInfo.id = res.data.id
+        }
+      )
+      .catch()
   }
 }
 </script>

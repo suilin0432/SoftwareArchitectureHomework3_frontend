@@ -22,6 +22,7 @@
 </template>
 <script>
 import {request_register} from '../httpRequests/api'
+import {setCookie, getCookie, deleteCookie} from '../cookieOperation'
 export default {
   name: 'register',
   data () {
@@ -46,6 +47,8 @@ export default {
           this.$store.state.isLogged = true
           this.$store.state.userInfo.username = res.data.username
           this.$store.state.userInfo.id = res.data.id
+          setCookie('username', res.data.username, 60)
+          setCookie('userId', res.data.id, 60)
           this.$router.push('/function')
         })
         .catch(e => {

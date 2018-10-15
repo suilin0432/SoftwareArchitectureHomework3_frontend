@@ -16,6 +16,7 @@
 </template>
 <script>
 import {request_login} from '../httpRequests/api'
+import {setCookie, getCookie, deleteCookie} from '../cookieOperation'
 
 export default {
   name: 'login',
@@ -36,6 +37,8 @@ export default {
           this.$store.state.isLogged = true
           this.$store.state.userInfo.username = res.data.username
           this.$store.state.userInfo.id = res.data.id
+          setCookie('username', res.data.username, 60)
+          setCookie('userId', res.data.id, 60)
           this.$message({
             message: '登陆成功',
             type: 'success',

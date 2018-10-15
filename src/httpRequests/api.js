@@ -68,3 +68,7 @@ export const request_user_delete = id => {
 export const request_user_find = () => {
   return axios.get('/function/user/find')
 }
+
+export const request_get_info = () => {
+  return axios.get('/user')
+}
