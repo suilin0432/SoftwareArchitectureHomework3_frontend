@@ -103,7 +103,14 @@ export default {
         res => {
           this.userAuth = true
           this.userList = res.data
-          console.log(this.userList)
+          for (var j = 0; j < this.userList.length; j++) {
+            var roles = this.userList[j].roleList
+            var role = ''
+            for (var i = 0; i < roles.length; i++) {
+              role += (roles[i].name + ' ')
+            }
+            this.userList[j].roleList = role
+          }
         }
       )
       .catch(

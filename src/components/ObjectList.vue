@@ -2,7 +2,7 @@
 <div>
   <el-table
     :data="items"
-    style="width: 100%">
+    style="width: 60%; margin: 0 auto">
     <el-table-column
       prop="name"
       label="名称"
@@ -19,6 +19,7 @@
       label="描述">
     </el-table-column>
     <el-table-column
+      width="180"
       label="修改">
       <template slot-scope="scope">
         <el-button
