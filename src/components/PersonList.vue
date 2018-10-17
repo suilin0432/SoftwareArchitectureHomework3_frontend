@@ -2,7 +2,7 @@
   <div>
     <el-table
       :data="items"
-      style="width: 100%">
+      style="width: 40%; margin: 0 auto">
       <el-table-column
         prop="username"
         label="用户名"

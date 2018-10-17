@@ -16,12 +16,13 @@
       <el-menu-item v-if="isLogged" index="logout" @click="logout">
         登出
       </el-menu-item>
+      <el-menu-item index="online">当前在线人数: {{this.$store.state.userOnline}} (5秒刷新一次)</el-menu-item>
     </el-menu>
   </div>
 </template>
 
 <script>
-import {request_logout, request_get_info} from '../httpRequests/api'
+import {request_logout, request_get_info, request_get_useronline} from '../httpRequests/api'
 import {setCookie, getCookie, deleteCookie} from '../cookieOperation'
 export default {
   name: 'navbar',
@@ -66,6 +67,21 @@ export default {
         }
       )
       .catch()
+    request_get_useronline()
+      .then(
+        res => {
+          this.$store.state.userOnline = res.data
+        }
+      ).catch()
+    var this_ = this
+    setInterval(function () {
+      request_get_useronline()
+        .then(
+          res => {
+            this_.$store.state.userOnline = res.data
+          }
+        )
+    }, 5000)
   }
 }
 </script>

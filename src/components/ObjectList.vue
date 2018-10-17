@@ -54,15 +54,15 @@
     </el-form>
   </div>
   <el-dialog title="修改信息" :visible.sync="dialogFormVisible">
-    <el-form :model="form">
+    <el-form :model="updateForm">
       <el-form-item label="名称" >
-        <el-input v-model="form.name" autocomplete="off"></el-input>
+        <el-input v-model="updateForm.name" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="价格" >
-        <el-input v-model="form.price" autocomplete="off"></el-input>
+        <el-input v-model="updateForm.price" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="描述" >
-        <el-input v-model="form.description" autocomplete="off"></el-input>
+        <el-input v-model="updateForm.description" autocomplete="off"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -83,6 +83,12 @@ export default {
         price: 0,
         description: ''
       },
+      updateForm: {
+        id: '',
+        name: '',
+        price: 0,
+        description: ''
+      },
       dialogFormVisible: false,
       index: -1,
       row: ''
@@ -94,13 +100,13 @@ export default {
       this.dialogFormVisible = true
       this.index = index
       this.row = row
-      this.form.id = row.id
-      this.form.name = row.name
-      this.form.price = row.price
-      this.form.description = row.description
+      this.updateForm.id = row.id
+      this.updateForm.name = row.name
+      this.updateForm.price = row.price
+      this.updateForm.description = row.description
     },
     handleEdit (update, items) {
-      update(this.form)
+      update(this.updateForm)
         .then(
           res => {
             items[items.indexOf(this.row)].name = res.data.name

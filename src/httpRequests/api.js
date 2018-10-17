@@ -72,3 +72,7 @@ export const request_user_find = () => {
 export const request_get_info = () => {
   return axios.get('/user')
 }
+
+export const request_get_useronline = () => {
+  return axios.get('/userCount')
+}

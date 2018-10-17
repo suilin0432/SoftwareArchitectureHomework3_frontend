@@ -8,7 +8,8 @@ Vue.use(Vuex)
 const state = {
   // 默认数据
   isLogged: false,
-  userInfo: {'username': 'test', 'id': ''}
+  userInfo: {'username': 'test', 'id': ''},
+  userOnline: 0
 }
 
 const store = new Vuex.Store({

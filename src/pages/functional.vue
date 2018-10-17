@@ -1,28 +1,31 @@
 <template>
-  <div class="function" v-if="this.$store.state.isLogged">
-    <el-menu :default-active="this.activeIndex" mode="vertical">
-      <el-menu-item index="car" @click="setCarActive">
-        汽车
-      </el-menu-item>
-      <el-menu-item index="commodity" @click="setCommodityActive">
-        货物
-      </el-menu-item>
-      <el-menu-item index="user" @click="setUserActive">
-        用户
-      </el-menu-item>
-    </el-menu>
-    <div v-if="carActive">
-      <ObjectList v-if="carAuth" v-bind:items="carList" :update="request_car_update" :insert="request_car_insert" :deletefunction="request_car_delete"></ObjectList>
-      <div v-if="!carAuth">对不起你没有Car的浏览权限</div>
+  <div>
+    <div class="function" v-if="this.$store.state.isLogged">
+      <el-menu :default-active="this.activeIndex" mode="vertical">
+        <el-menu-item index="car" @click="setCarActive">
+          汽车
+        </el-menu-item>
+        <el-menu-item index="commodity" @click="setCommodityActive">
+          货物
+        </el-menu-item>
+        <el-menu-item index="user" @click="setUserActive">
+          用户
+        </el-menu-item>
+      </el-menu>
+      <div v-if="carActive">
+        <ObjectList v-if="carAuth" v-bind:items="carList" :update="request_car_update" :insert="request_car_insert" :deletefunction="request_car_delete"></ObjectList>
+        <div v-if="!carAuth">对不起你没有Car的浏览权限</div>
+      </div>
+      <div v-if="commodityActive">
+        <ObjectList v-if="commodityAuth" v-bind:items="commodityList" :update="request_commodity_update" :insert="request_commodity_insert" :deletefunction="request_commodity_delete"></ObjectList>
+        <div v-if="!commodityAuth">对不起你没有Commodity的浏览权限</div>
+      </div>
+      <div v-if="userActive">
+        <PersonList v-if="userAuth" v-bind:items="userList" :deletefunction="request_user_delete"></PersonList>
+        <div v-if="!userAuth">对不起你没有User的浏览权限</div>
+      </div>
     </div>
-    <div v-if="commodityActive">
-      <ObjectList v-if="commodityAuth" v-bind:items="commodityList" :update="request_commodity_update" :insert="request_commodity_insert" :deletefunction="request_commodity_delete"></ObjectList>
-      <div v-if="!commodityAuth">对不起你没有Commodity的浏览权限</div>
-    </div>
-    <div v-if="userActive">
-      <PersonList v-if="userAuth" v-bind:items="userList" :deletefunction="request_user_delete"></PersonList>
-      <div v-if="!userAuth">对不起你没有User的浏览权限</div>
-    </div>
+    <div v-if="!this.$store.state.isLogged">请先登录</div>
   </div>
 </template>
 <script>
