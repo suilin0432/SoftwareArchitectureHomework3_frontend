@@ -1,4 +1,4 @@
-# softwarearchitecturehomework2
+# softwarearchitecturehomework3_frontend
 
 > A Vue.js project
 
